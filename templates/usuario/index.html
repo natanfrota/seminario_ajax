@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Busca de Usuários</title>
+  <link rel="stylesheet" href="{% static 'usuario/style.css' %}">
+</head>
+<body>
+
+  <h2>Busque usuários por nome</h2>
+
+  <input type="search" id="campoBusca" placeholder="Digite o nome..." autocomplete="off" />
+
+  <ul id="listaUsuarios"></ul>
+  <div id="mensagem"></div>
+
+  <script>
+    const campoBusca = document.getElementById('campoBusca');
+    const listaUsuarios = document.getElementById('listaUsuarios');
+    const mensagem = document.getElementById('mensagem');
+
+    campoBusca.addEventListener('input', () => {
+      const query = campoBusca.value.trim();
+
+      if (query.length === 0) {
+        listaUsuarios.innerHTML = '';
+        mensagem.textContent = 'Digite algo para buscar usuários.';
+        return;
+      }
+
+      mensagem.textContent = 'Buscando...';
+      listaUsuarios.innerHTML = '';
+
+      fetch(`api/usuarios?q=${encodeURIComponent(query)}`)
+          .then(response => {
+            if (!response.ok) throw new Error('Erro na requisição');
+            return response.json();
+          })
+          .then(data => {
+            listaUsuarios.innerHTML = '';
+
+            if (!data.length) {
+              mensagem.textContent = 'Nenhum usuário encontrado.';
+              return;
+            }
+
+            mensagem.textContent = '';
+
+            data.forEach(user => {
+              const li = document.createElement('li');
+              li.innerHTML = `
+                <img src="${user.thumbnail_url}" alt="Foto de ${user.first_name}" />
+                <div class="info">
+                  <strong>${user.first_name} ${user.last_name}</strong>
+                  <small>Email: ${user.email}</small><br />
+                  <small>Cidade: ${user.city}</small>
+                </div>
+              `;
+              listaUsuarios.appendChild(li);
+            });
+          })
+          .catch(err => {
+            mensagem.textContent = 'Erro ao buscar usuários.';
+            console.error(err);
+          });
+    });
+  </script>
+
+</body>
+</html>

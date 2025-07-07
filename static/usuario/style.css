@@ -1,0 +1,71 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    margin: 40px auto;
+    max-width: 600px;
+    padding: 0 20px;
+    color: #333;
+}
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #222;
+}
+#campoBusca {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 18px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+    outline: none;
+}
+#campoBusca:focus {
+    border-color: #3b82f6; /* azul */
+    box-shadow: 0 0 5px rgba(59,130,246,0.5);
+}
+#listaUsuarios {
+    margin-top: 30px;
+    list-style: none;
+    padding: 0;
+}
+#listaUsuarios li {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    transition: box-shadow 0.3s ease;
+}
+#listaUsuarios li:hover {
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+}
+#listaUsuarios img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 20px;
+    border: 2px solid #3b82f6;
+}
+#listaUsuarios .info {
+    flex-grow: 1;
+}
+#listaUsuarios .info strong {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 6px;
+    color: #111;
+}
+#listaUsuarios .info small {
+    color: #666;
+    font-size: 14px;
+}
+#mensagem {
+    text-align: center;
+    margin-top: 20px;
+    color: #555;
+    font-style: italic;
+}
